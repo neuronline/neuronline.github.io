@@ -33,7 +33,8 @@ A collection of information pertaining to [computational neuroscience](https://e
     1. Modeling Long-Term Synaptic Plasticity
     1. Modeling Local Field Potential (LFP) 
     1. Software
-       1. NEURON
+       1. [NEURON](compneuro/software/neuron)
+           1. [NMODL (.mod) Files](compneuro/software/neuron/nmodl)
        1. BMTK
           1. Installation
        1. BMTools
