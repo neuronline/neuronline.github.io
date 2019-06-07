@@ -23,12 +23,13 @@ A collection of information pertaining to [computational neuroscience](https://e
     1. Math
     1. [Building a Model](compneuro/building)
     1. Dynamics
-    1. Modeling Ion Channels
-    1. Modeling Single Cells
-    1. Modeling Synapses
-    1. Modeling Networks
-    1. Modeling Neurotransmitter Effects
-    1. [Modeling Short-Term Synaptic Plasticity](compneuro/stsp)
+    1. Modeling 
+       1. Ion Channels
+       1. Single Cells
+       1. Synapses
+       1. Networks
+       1. Neurotransmitter Effects
+       1. [Short-Term Synaptic Plasticity](compneuro/stsp)
     1. Modeling Long-Term Synaptic Plasticity
     1. Modeling Local Field Potential (LFP) 
     1. Software
