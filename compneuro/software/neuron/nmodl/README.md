@@ -82,7 +82,11 @@ Functions defined by the ```FUNCTION``` block are vailable at the hoc level and 
 * Otherwise, the section will need to be referenced:
     ````
     section_name setdata_suffix(x)
+    
+#### ```NET_RECEIVE```
+Artificial cell models don't have ```BREAKPOINT, KINETTIC or DERIVITIVE```. They only act when a new event arrives, these calculations are carried out in the ```NET_RECIEVE``` block.
 
+* Input is the weight of the connection
 
 ### Keywords
 #### ```SUFFIX```
