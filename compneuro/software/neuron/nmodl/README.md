@@ -114,6 +114,7 @@ The ```NONSPECIFIC_CURRENT``` has two purposes:
     ```
 
 #### Special Variables
+
 ```v,celsius,t,diam,area,dt```
 
 
@@ -121,6 +122,7 @@ The ```NONSPECIFIC_CURRENT``` has two purposes:
 
 
 ### LEAK Current
+
 ```
 : A passive leak current
 NEURON {  : Visible from the NEURON programming environment
