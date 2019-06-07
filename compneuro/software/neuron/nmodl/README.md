@@ -99,17 +99,17 @@ The ```NONSPECIFIC_CURRENT``` has two purposes:
 #### Comments
 * A single line comment starts with a colon "```:```"
 * Multiline comments start with ```COMMENT``` and end with ```ENDCOMMENT```
+    ```c
+    COMMENT
+      This is a
+      multiple line
+      comment
+    ENDCOMMENT
+    ```
 
 #### Special Variables
 ```v,celsius,t,diam,area,dt```
 
-```c
-COMMENT
-This is a
-multiple line
-comment
-ENDCOMMENT
-```
 
 ## Examples
 
@@ -117,16 +117,16 @@ ENDCOMMENT
 ### LEAK Current
 ```
 : A passive leak current
-NEURON {  
+NEURON {  : Visible from the NEURON programming environment
   SUFFIX leak  : How the mechanism will be refered to by NEURON code (insert leak) 
-  NONSPECIFIC_CURRENT i  
-  RANGE i, e, g : Values here will need to appear in PARAMETER or ASSIGNED
+  NONSPECIFIC_CURRENT i  : will be reckonded in charge balance equations
+  RANGE i, e, g : Values here will need to appear in PARAMETER or ASSIGNED, will be different for each segment/section
 }
-PARAMETER {  
-  g = 0.001  (siemens/cm2)  < 0, 1e9 >  : variable = value (units)
+PARAMETER {  : Variables specified here are assigned by user or changed by hoc 
+  g = 0.001  (siemens/cm2)  < 0, 1e9 >  : variable = value (units) <min, max (in hoc/gui)>
   e = -65    (millivolt)
 }
-ASSIGNED {  
+ASSIGNED {  : values that will appear on the lefthand side of an assignment statement, or are driving values
   i  (milliamp/cm2)  
   v  (millivolt)
 }
