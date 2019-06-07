@@ -35,6 +35,9 @@
 * Any parameter that doesn't appear in a ```NEURON``` block's ```RANGE``` statement will have a ```GLOBAL``` scope, meaning that chaning the value will affect every instance of that mechanism throughout an entire model.
 
 #### ```STATE```
+If a model involves differential equations, families of algebraic equations or kinetic reaction schemes, their dependent variables or unknowns are listed in the ```STATE``` block. 
+
+* Variables declared here are called ```STATE``` variables or ```STATE```S.
 
 #### ```ASSIGNED```
 Can be used to declare two kinds of variables:
@@ -62,8 +65,24 @@ The ```BREAKPOINT``` block is the main computation block in NMODL.
 
 
 #### ```DERIVATIVE```
+Used to assign values to the derivatives of those ```STATE```S that are described by differential equations. 
+
+* Statements are of the form ```y' = expr```
+* Can contain higher order derivatives (more apoostrophes)
+* Equations are integrated using the numerical method specified by the ```SOLVE``` statement in the ```BREAKPOINT``` block
+* ```SOLVE``` statements should explicity invoke one of the integration methods appropriate for systems in which state variables can vary widely during a time step. 
+
+The ```cnexp``` method combines second order accuracy with computational efficiency is a good choice for most programs
+
 #### ```KINETIC```
+
 #### ```FUNCTION```
+Functions defined by the ```FUNCTION``` block are vailable at the hoc level and other mechanisms by adding the suffix to the mechanism that they're defined in.
+* Functions that do not reference ```RANGE``` varuables can be called from hoc directly (ie: ```GLOBAL``` is allowed)
+* Otherwise, the section will need to be referenced:
+    ````
+    section_name setdata_suffix(x)
+
 
 ### Keywords
 #### ```SUFFIX```
@@ -88,6 +107,9 @@ cable{
 }
 print cable.i_leak(0.5)
 ```
+#### ```POINT_PROCESS```
+Identifies the mechanism be be a point process, so it will be managed in ```hoc``` using an object oriented syntax (synapses).
+
 #### ```NONSPECIFIC_CURRENT```
 The ```NONSPECIFIC_CURRENT``` has two purposes:
 * the value ```i``` specified after (Ex: ```NONSPECIFIC_CURRENT i```) will be reckonded in charge balance equations
