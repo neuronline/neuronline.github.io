@@ -18,6 +18,7 @@
       g = 0.001  (siemens/cm2)  < 0, 1e9 >
     }
     ````
+    
 #### ```PARAMETER```
 * Variables specified here are assigned by user or changed by hoc 
 * They do not typically change but can throughought but can emulate some external influence on the characteristic properties of the model
@@ -30,6 +31,7 @@
 * Any parameter that doesn't appear in a ```NEURON``` block's ```RANGE``` statement will have a ```GLOBAL``` scope, meaning that chaning the value will affect every instance of that mechanism throughout an entire model.
 
 #### ```STATE```
+
 #### ```ASSIGNED```
 Can be used to declare two kinds of variables:
 * those given values outside the mod file
@@ -73,17 +75,20 @@ print i_leak
 The ```NONSPECIFIC_CURRENT``` has two purposes:
 * the value ```i``` specified after (Ex: ```NONSPECIFIC_CURRENT i```) will be reckonded in charge balance equations
 * This current will make no contributions to mass balance equations
+
 #### ```RANGE```
 * Anything denoted by range is accessible by the ```hoc``` interpreter
 * These variables are a function of position and can have different values for each of the segments that make up a section
 * Each variable mentioned in ```RANGE``` should be declared in a ```PARAMETER``` or ```ASSIGNED``` block.
 * Alternative to ```RANGE``` is ```GLOBAL```
+
 #### ```GLOBAL```
 
 ### Other
 #### Comments
 * A single line comment starts with a colon "```:```"
 * Multiline comments start with ```COMMENT``` and end with ```ENDCOMMENT```
+
 #### Special Variables
 ```v,celsius,t,diam,area,dt```
 
