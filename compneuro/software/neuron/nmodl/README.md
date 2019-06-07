@@ -41,12 +41,20 @@ The first group includes variables potentially available to every mechanism, lik
 The second group omits variables that are unknons in simmultaneous linear or nonlinear algebraic equations, or that are dependent variables in differential equations, or kinetic reaction schemes
 
 * Values are not visible at the ```hoc``` level unless it's declared in a ```RANGE``` or ```GLOBAL``` statement
+* The current ```i``` isn't a state variable because the model does not define it in terms of a differential equation, i does not have dynamics of its own, further it is a known set of equations by direct assignment.
+* In the leak example below ```v``` is also similarly declared in the ```ASSIGNED``` block. In this case ```v``` is a driving force rather than a ```STATE``` variable.
 
-### Special Blocks
+### Equation Definition Blocks
 #### ```NEURON```
 The ```NEURON``` blockdefines what the model of the mechanism looks like from the outside. 
+
 #### ```INITIAL```
 #### ```BREAKPOINT```
+The ```BREAKPOINT``` block is the main computation block in NMODL.
+* Executes simulations by incrementing an independent variable over a sequence of steps or "breakpoints" at which the dependent variables of the model are computed and displayed.
+* At the end of the ```BREAKPOINT``` all variables should be consistent with the independent variable (```t```)
+
+
 #### ```DERIVATIVE```
 #### ```KINETIC```
 #### ```FUNCTION```
@@ -68,8 +76,11 @@ NEURON {
 
 *NEURON file*
 ```
-insert leak
-print i_leak
+cable{
+  nseg = 1 //Number of segments per this section
+  insert leak 
+}
+print cable.i_leak(0.5)
 ```
 #### ```NONSPECIFIC_CURRENT```
 The ```NONSPECIFIC_CURRENT``` has two purposes:
@@ -128,3 +139,7 @@ BREAKPOINT {
 
 * [NEURON Chapter 9](https://neuron.yale.edu/ftp/ted/book/revisions/chap9indexedref.pdf)
 * [NEURON Chapter 10](https://neuron.yale.edu/ftp/ted/book/revisions/chap10indexedref.pdf)
+
+----   
+*This page is part of a collection of pages on various topics of [computational neuroscience](https://en.wikipedia.org/wiki/Computational_neuroscience). Please direct questions and suggestions to the author Tyler Banks [[website](https://tylerbanks.net)][[github](https://github.com/tjbanks)] at [tyler@tylerbanks.net](mailto:tyler@tylerbanks.net).*
+
