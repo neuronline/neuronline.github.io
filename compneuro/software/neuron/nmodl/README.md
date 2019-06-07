@@ -20,11 +20,25 @@
     ````
 #### ```PARAMETER```
 * Variables specified here are assigned by user or changed by hoc 
-* They do not typically change but can throughought but can
+* They do not typically change but can throughought but can emulate some external influence on the characteristic properties of the model
+    * Time-dependent PARAMETER changes - Models with discontinuities
 * They appear in nrnpointmenu
+* Ex:
+    ```
+    g = 0.001  (siemens/cm2)  < 0, 1e9 >  : variable = value (units) <minimum, maximum value that can be entered via gui>
+    ```
+* Any parameter that doesn't appear in a ```NEURON``` block's ```RANGE``` statement will have a ```GLOBAL``` scope, meaning that chaning the value will affect every instance of that mechanism throughout an entire model.
 
 #### ```STATE```
 #### ```ASSIGNED```
+Can be used to declare two kinds of variables:
+* those given values outside the mod file
+* those that appear on the left hand side of assignment statements in the mod file
+The first group includes variables potentially available to every mechanism, like ```v, celsius, t``` and ionic variables.
+
+The second group omits variables that are unknons in simmultaneous linear or nonlinear algebraic equations, or that are dependent variables in differential equations, or kinetic reaction schemes
+
+* Values are not visible at the ```hoc``` level unless it's declared in a ```RANGE``` or ```GLOBAL``` statement
 
 ### Special Blocks
 #### ```NEURON```
@@ -85,7 +99,25 @@ ENDCOMMENT
 
 
 ### LEAK Current
-
+```
+: A passive leak current
+NEURON {  
+  SUFFIX leak  : How the mechanism will be refered to by NEURON code (insert leak) 
+  NONSPECIFIC_CURRENT i  
+  RANGE i, e, g : Values here will need to appear in PARAMETER or ASSIGNED
+}
+PARAMETER {  
+  g = 0.001  (siemens/cm2)  < 0, 1e9 >  : variable = value (units)
+  e = -65    (millivolt)
+}
+ASSIGNED {  
+  i  (milliamp/cm2)  
+  v  (millivolt)
+}
+BREAKPOINT { 
+  i = g*(v - e) 
+}
+```
 
 ## References
 
