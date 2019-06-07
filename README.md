@@ -50,5 +50,7 @@ A collection of information pertaining to [computational neuroscience](https://e
 1. Paper Summaries
    1. Neuroscience
       1. [Hummos Et Al 2014 - Intrinsic Mechanisms Stabilize Encoding and Retrieval Circuits Differentially in Hippocampal Network Model](summaries/neuro/hummos2014)
+
+
 ----   
 *This page is part of a collection of pages on various topics of [computational neuroscience](https://en.wikipedia.org/wiki/Computational_neuroscience). Please direct questions and suggestions to the author Tyler Banks [[website](https://tylerbanks.net)][[github](https://github.com/tjbanks)] at [tyler@tylerbanks.net](mailto:tyler@tylerbanks.net).*
