@@ -12,6 +12,7 @@ Two types of STP have been observed:
 
 STP typically occurs on the order of hundereds to thousands of milliseconds and is temporary. Without activity the synapse will quickly return to basline levels.
 
+STP may serve as a substrate for processing temporal information. The response of a post-synaptic neuron depends on the history of the presynaptic activity. This information could theoretically be extracted for use. STP can enrich computational studies, allowing networks to produce capabilities difficult to be seen using static connections.
 
 
 ## References
