@@ -105,7 +105,7 @@ The ```NONSPECIFIC_CURRENT``` has two purposes:
 #### Comments
 * A single line comment starts with a colon "```:```"
 * Multiline comments start with ```COMMENT``` and end with ```ENDCOMMENT```
-    ```c
+    ```
     COMMENT
       This is a
       multiple line
