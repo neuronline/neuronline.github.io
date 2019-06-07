@@ -5,14 +5,18 @@ A collection of information pertaining to [computational neuroscience](https://e
 # Table of Contents
 
 1. Electrical Engineering Theory
-    1. a
-    1. b
+    1. Essential Laws
+    1. Components and Diagrams
+    1. Important Equations
 1. Neuroscience
     1. Cellular Neuroscience
        1. Ion Channels
        1. [Short-Term Synaptic Plasticity](neuro/stsp)
     1. Systems Neuroscience
        1. Visual System
+       1. Auditory System
+       1. Motor Control
+       1. Pathways
        1. Hippocampus
 1. Computational Neuroscience
     1. Basics
@@ -27,11 +31,17 @@ A collection of information pertaining to [computational neuroscience](https://e
     1. [Modeling Short-Term Synaptic Plasticity](compneuro/stsp)
     1. Modeling Long-Term Synaptic Plasticity
     1. Modeling Local Field Potential (LFP) 
+    1. Software
+       1. NEURON
+       1. BMTK
+          1. Installation
+       1. BMTools
+       1. LFPy
 1. Control Systems
-    1. a
+    1. Feeback
     1. b
 1. Non-Linear Systems
-    1. a
+    1. Limit Cycles
     1. b
 1. Machine Learning
     1. Supervised Learning

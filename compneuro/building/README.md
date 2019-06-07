@@ -8,7 +8,7 @@ Typically, building a model consists of several key primary steps:
 1. Connectivity (convergence/divergence) for both chemical and electrical synapses, including spatial considerations
 1. Synaptic models for chemical and electrical synapses
 1. Neurotransmitter effects
-1. [Short-term synaptic plasticity](/compneuro/building/stsp)
+1. [Short-term synaptic plasticity](/compneuro/stsp)
 1. Long-term synaptic plasticity
 
 ## Validating the model
