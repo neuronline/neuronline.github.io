@@ -1,5 +1,9 @@
 # NEURON NMODL (.mod) Files
 
+[Home](/) > [Computational Neuroscience](/compneuro) > [Neuron](/compneuro/neuron/) > [NMODL Files](./)
+
+----
+
 ## General Information
 
 * Named blocks have the general form ```KEYWORD { statements }```
@@ -49,6 +53,8 @@ The second group omits variables that are unknons in simmultaneous linear or non
 The ```NEURON``` blockdefines what the model of the mechanism looks like from the outside. 
 
 #### ```INITIAL```
+Code in the ```INITIAL``` block is executed when the run system's ```finitialize()``` method is called.
+
 #### ```BREAKPOINT```
 The ```BREAKPOINT``` block is the main computation block in NMODL.
 * Executes simulations by incrementing an independent variable over a sequence of steps or "breakpoints" at which the dependent variables of the model are computed and displayed.
@@ -136,7 +142,7 @@ BREAKPOINT {
 ```
 
 ## References
-
+* [Where to learn about mod files and NMODL](https://www.neuron.yale.edu/phpBB/viewtopic.php?t=11)
 * [NEURON Chapter 9](https://neuron.yale.edu/ftp/ted/book/revisions/chap9indexedref.pdf)
 * [NEURON Chapter 10](https://neuron.yale.edu/ftp/ted/book/revisions/chap10indexedref.pdf)
 
