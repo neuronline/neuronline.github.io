@@ -1,6 +1,6 @@
 # Modeling Short-Term Synaptic Plasticity
 
-In this synapse we can model short-term synaptic plasticity.
+In this synapse we can model short-term synaptic plasticity. See [here](https://senselab.med.yale.edu/ModelDB/ShowModel.cshtml?model=168314&file=/HummosEtAl2014/pyr2pyr.mod#tabs-2) for the original file.
 
 When a synapse is received the **NET_RECEIVE** method is called.
 
