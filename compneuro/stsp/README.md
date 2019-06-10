@@ -1,5 +1,137 @@
 # Modeling Short-Term Synaptic Plasticity
 
+In this synapse we can model short-term synaptic plasticity.
+
+When a synapse is received the **NET_RECEIVE** method is called.
+
+```
+NET_RECEIVE(dummy_weight) {
+    
+    : t0 denotes spike time for conductance opening
+    : t0 will now become the moment the spike occured
+    
+    t0 = t 
+
+    : Added by Ali, Synaptic facilitation
+    : In the following equations
+    : tsyn is the time of the last synapse
+    : tauF, tauD1, and tauD2 are rise/decay rates for 
+    : facilitation, fast depression and slow depression
+    : These values are set to 1 for this simulation with a min max of < 1e-9, 1e9 >
+    
+    F  = 1 + (F-1)* exp(-(t - tsyn)/tauF)
+    D1 = 1 - (1-D1)*exp(-(t - tsyn)/tauD1)
+    D2 = 1 - (1-D2)*exp(-(t - tsyn)/tauD2)
+    
+    : The value of the exponential will be higher when the time since the 
+    : last spike is low. This will always be positive.
+    : tau will determine the rate of decay, meaning 
+    : if tau is large the larger effect will linger and have a greater effect
+    : even if it's been a long time sinc the last spike.
+    
+    : With higher initial values of f, d1, and d2 the more impact each spike will have
+    
+    : uncomment the following line for step-by-step value output
+    : printf("%g\t%g\t%g\t%g\t%g\t%g\n", t, t-tsyn, F, D1, D2, facfactor)
+    
+    : tsyn (time of last synapse) is set to the current time.
+    
+    tsyn = t
+
+    : The "facilitation factor" is computed
+    
+    facfactor = F * D1 * D2
+    
+    
+    : Effects are scaled for next spike, based on user provided input
+    
+    F = F * f
+
+    if (F > 30) { 
+        F=30
+    }
+    D1 = D1 * d1
+    D2 = D2 * d2
+    
+    :printf("\t%g\t%g\t%g\n", F, D1, D2)
+	
+}
+```
+
+**BREAKPOINT** is executed at every time step. During this time the **release** method is solved using the cnexp method.
+
+```
+BREAKPOINT {
+    SOLVE release METHOD cnexp
+}
+```
+ 
+**release** method
+
+```
+DERIVATIVE release {
+    
+    : t0 is initially set to a value < 0 to prevent this code 
+    : from running at the start
+    : if the time since the last spike is < than the 
+    : specified duration of Cdur_nmda/ampa the effects are
+    : allowed to remain
+    
+    if (t0>0) {
+        if (t-t0 < Cdur_nmda) {
+            on_nmda = 1
+        } else {
+            on_nmda = 0
+        }
+        if (t-t0 < Cdur_ampa) {
+            on_ampa = 1
+        } else {
+            on_ampa = 0
+        }
+    }
+    
+    r_nmda' = AlphaTmax_nmda*on_nmda*(1-r_nmda) -Beta_nmda*r_nmda
+    r_ampa' = AlphaTmax_ampa*on_ampa*(1-r_ampa) -Beta_ampa*r_ampa
+
+    dW_ampa = eta(Capoolcon)*(lambda1*omega(Capoolcon, threshold1, threshold2)-lambda2*W_ampa)*dt
+
+    : Limit for extreme large weight changes
+    if (fabs(dW_ampa) > maxChange) {
+        if (dW_ampa < 0) {
+            dW_ampa = -1*maxChange
+        } else {
+            dW_ampa = maxChange
+        }
+    }
+
+    :Normalize the weight change
+    normW = (W_ampa-Wmin)/(Wmax-Wmin)
+    if (dW_ampa < 0) {
+        scaleW = sqrt(fabs(normW))
+    } else {
+        scaleW = sqrt(fabs(1.0-normW))
+    }
+
+    W_ampa = W_ampa + dW_ampa*scaleW *(1+ (wACH * (ACH - 1))) * LearningShutDown
+
+    :Weight value limits
+    if (W_ampa > Wmax) { 
+        W_ampa = Wmax
+    } else if (W_ampa < Wmin) {
+        W_ampa = Wmin
+    }
+
+    g_nmda = gbar_nmda*r_nmda * facfactor
+    i_nmda = W_nmda*g_nmda*(v - Erev_nmda)*sfunc(v)
+
+    g_ampa = gbar_ampa*r_ampa * facfactor
+    i_ampa = W_ampa*g_ampa*(v - Erev_ampa)  * (1 + (bACH * (ACH-1)))*(aDA + (bDA * (DA-1))) 
+
+    ICa = P0*g_nmda*(v - ECa)*sfunc(v)
+    Capoolcon'= -fCa*Afactor*ICa + (Cainf-Capoolcon)/tauCa
+}
+```
+
 ## References 
 
 * [https://github.com/tjbanks/synaptic_plasticity](https://github.com/tjbanks/synaptic_plasticity)
